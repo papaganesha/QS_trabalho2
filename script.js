@@ -170,7 +170,7 @@ function verificaCpf(cpf) {
 }
 
 //Verificar se usuario tem 12 anos ou mais
-function verificaNasc(data) {
+function verificaNasc(data){
   var dataNasc = new Date(data);
   var anoNasc = dataNasc.getFullYear();
   var anoAtual = new Date().getFullYear();
@@ -183,5 +183,4 @@ function verificaNasc(data) {
 
 }
 
-
-module.exports = { verificaCpf, verificaNasc };
+module.exports = { verificaNasc };

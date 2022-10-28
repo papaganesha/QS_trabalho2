@@ -20,7 +20,11 @@
   "dependencies": {
     "jest": "^29.2.2"
   },
+  "jest":{
+    "testEnvironment": "jsdom"
+  },
   "devDependencies": {
-    "@babel/preset-env": "^7.19.4"
+    "@babel/preset-env": "^7.19.4",
+    "jest-environment-jsdom": "^29.2.2"
   }
 }
