@@ -33,6 +33,7 @@ function mostrarAlertaSuccess(titulo, texto) {
   div.classList.add("alert-dismissible");
   div.classList.add("fade");
   div.classList.add("show");
+  div.classList.add("mx-4");
   div.setAttribute("role", "alert");
   var btn = document.createElement("button");
   btn.classList.toggle("btn-close");
@@ -61,7 +62,7 @@ function cadastro(e) {
   var confirmaSenha = document.getElementById("confirmaSenha");
   if (nome.value && email.value && cpf.value && dataNasc.value && senha.value && confirmaSenha.value) {
     //SE SENHAS COMBINAREM
-    if (!verificaSenha(senha.value, confirmaSenha.value)) {
+    if (!verificaSenhas(senha.value, confirmaSenha.value)) {
       mostrarAlertaWarning("As senhas não combinam", "Por favor digite novamente");
     } else {
       if (!verificaCpf(cpf.value)) {
@@ -103,14 +104,18 @@ const login = (e) => {
   var senha = document.getElementById("senha");
 
   if (email.value && senha.value) {
-    if (email.value == "joaopedro@gmail.com" || email.value == "sandro@gmail.com") {
-      if (senha.value == "12345678") {
-        mostrarAlertaSuccess("Logado com sucesso.", "Aproveite a plataforma!!!");
+    if (verificaEmail(email.value)) {
+      if (email.value == "joaopedro@gmail.com" || email.value == "sandro@gmail.com") {
+        if (senha.value == "12345678") {
+          mostrarAlertaSuccess("Logado com sucesso.", "Aproveite a plataforma!!!");
+        } else {
+          mostrarAlertaWarning("Senha inválida", "Senha não confere, tente novamente.");
+        }
       } else {
-        mostrarAlertaWarning("Senha inválida", "Senha não confere, tente novamente.");
+        mostrarAlertaWarning("Email não existe", "Email não encontrado, tente novamente.");
       }
     } else {
-      mostrarAlertaWarning("Email inválido", "Email não encontrado, tente novamente.");
+      mostrarAlertaWarning("Email inválido", "Email digitado é invalido, tente novamente.");
     }
 
   } else {
@@ -123,14 +128,30 @@ if (btnLogin) {
   btnLogin.addEventListener("click", login);
 }
 
+function verificaEmail(email) {
+  var re = /\S+@\S+\.\S+/;
+  return re.test(email);
+}
 
-function verificaSenha(senha, confirmaSenha) {
+function verificaSenha(senha) {
+  console.log(senha.length);
+  if (senha.length >= 8 && senha.length <= 50) {
+    return true
+  } else {
+    return false
+  }
+}
+
+verificaSenha("123456734567891011230491230123941204123012391420310");
+
+function verificaSenhas(senha, confirmaSenha) {
   if (senha == confirmaSenha) {
     return true
   } else {
     return false
   }
 }
+
 
 function verificaCpf(cpf) {
   cpf = cpf.replace(/[^\d]+/g, '');
@@ -170,7 +191,7 @@ function verificaCpf(cpf) {
 }
 
 //Verificar se usuario tem 12 anos ou mais
-function verificaNasc(data){
+function verificaNasc(data) {
   var dataNasc = new Date(data);
   var anoNasc = dataNasc.getFullYear();
   var anoAtual = new Date().getFullYear();
@@ -183,4 +204,4 @@ function verificaNasc(data){
 
 }
 
-module.exports = { verificaNasc };
+module.exports = { verificaEmail, verificaCpf, verificaNasc, verificaSenha, verificaSenhas};
