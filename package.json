@@ -1,0 +1,26 @@
+{
+  "name": "qs_trabalho2",
+  "version": "1.0.0",
+  "description": "Trabalho de Qualidade de Software - Criando e efetuando casos de teste",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/papaganesha/QS_trabalho2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/papaganesha/QS_trabalho2/issues"
+  },
+  "homepage": "https://github.com/papaganesha/QS_trabalho2#readme",
+  "dependencies": {
+    "jest": "^29.2.2"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.19.4"
+  }
+}

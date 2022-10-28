@@ -1,0 +1,10 @@
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+.form-row {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
