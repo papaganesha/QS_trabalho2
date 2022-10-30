@@ -7,4 +7,26 @@ html, body {
   border-radius: 5px;
   background-color: #f2f2f2;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 35%;
+  margin: auto;
+}
+
+.col-md-6 {
+  display: block;
+  width: auto !important;
+}
+
+.form-group  {
+  margin: auto !important;
+}
+
+input {
+  width: 300px !important;
+}
+
+.btn-primary {
+  width: 30%;
+  margin: auto;
 }
