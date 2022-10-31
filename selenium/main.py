@@ -40,12 +40,14 @@ class PythonOrgSearch(unittest.TestCase):
 
         WebDriverWait(driver, timeout=100)
 
-        alerta = driver.find_element(By.ID, "alerta")
+        alerta =  driver.find_element(By.ID, "alerta")
+    
         alerta_texto = alerta.get_attribute('innerHTML')
         self.assertIn("Logado com sucesso.", alerta_texto)
 
     def test_register_cpf_incorreto(self):
         driver = self.driver
+
         driver.get("http://localhost:5500/index.html")
         self.assertIn("Cadastro", driver.title)
         h2 = driver.find_element(By.ID, "titulo")
@@ -71,9 +73,101 @@ class PythonOrgSearch(unittest.TestCase):
 
         WebDriverWait(driver, timeout=100)
 
-        alerta = driver.find_element(By.ID, "alerta")
+        alerta =  driver.find_element(By.ID, "alerta")
+        
         alerta_texto = alerta.get_attribute('innerHTML')
         self.assertIn("CPF inválido.", alerta_texto)
+
+
+    def test_register_vazio(self):
+        driver = self.driver
+
+        driver.get("http://localhost:5500/index.html")
+        self.assertIn("Cadastro", driver.title)
+        h2 = driver.find_element(By.ID, "titulo")
+        h2_texto = h2.get_attribute('innerHTML')
+        self.assertIn("Cadastro", h2_texto)
+
+        btnCadastro = driver.find_element(By.ID, "btnCadastro")
+        btnCadastro.click()
+
+        WebDriverWait(driver, timeout=100)
+
+        alerta =  driver.find_element(By.ID, "alerta")
+        
+        alerta_texto = alerta.get_attribute('innerHTML')
+        self.assertIn("Faltam dados.", alerta_texto)
+
+
+    def test_login_correto(self):
+        driver = self.driver
+
+        driver.get("http://localhost:5500/login.html")
+        self.assertIn("Login", driver.title)
+        h2 = driver.find_element(By.ID, "titulo")
+        h2_texto = h2.get_attribute('innerHTML')
+        self.assertIn("Login", h2_texto)
+
+        email_input = driver.find_element(By.ID, "email")
+        senha_input = driver.find_element(By.ID, "senha")
+        
+        email_input.send_keys("joaopedro@gmail.com")
+        senha_input.send_keys("12345678")
+
+        btnLogin = driver.find_element(By.ID, "btnLogin")
+        btnLogin.click()
+
+        WebDriverWait(driver, timeout=100)
+
+        alerta =  driver.find_element(By.ID, "alerta")
+        
+        alerta_texto = alerta.get_attribute('innerHTML')
+        self.assertIn("Logado com sucesso.", alerta_texto)
+
+    def test_login_email_incorreto(self):
+        driver = self.driver
+
+        driver.get("http://localhost:5500/login.html")
+        self.assertIn("Login", driver.title)
+        h2 = driver.find_element(By.ID, "titulo")
+        h2_texto = h2.get_attribute('innerHTML')
+        self.assertIn("Login", h2_texto)
+
+        email_input = driver.find_element(By.ID, "email")
+        senha_input = driver.find_element(By.ID, "senha")
+        
+        email_input.send_keys("joaopedro@gmail")
+        senha_input.send_keys("12345678")
+
+        btnLogin = driver.find_element(By.ID, "btnLogin")
+        btnLogin.click()
+
+        WebDriverWait(driver, timeout=100)
+
+        alerta =  driver.find_element(By.ID, "alerta")
+        
+        alerta_texto = alerta.get_attribute('innerHTML')
+        self.assertIn("Email inválido.", alerta_texto)
+
+    def test_login_vazio(self):
+        driver = self.driver
+
+        driver.get("http://localhost:5500/login.html")
+        self.assertIn("Login", driver.title)
+        h2 = driver.find_element(By.ID, "titulo")
+        h2_texto = h2.get_attribute('innerHTML')
+        self.assertIn("Login", h2_texto)
+
+        btnLogin = driver.find_element(By.ID, "btnLogin")
+        btnLogin.click()
+
+        WebDriverWait(driver, timeout=100)
+
+        alerta =  driver.find_element(By.ID, "alerta")
+        
+        alerta_texto = alerta.get_attribute('innerHTML')
+        self.assertIn("Faltam dados.", alerta_texto)
+
 
     def tearDown(self):
         self.driver.close()
