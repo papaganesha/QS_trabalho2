@@ -4,6 +4,7 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
 
 class PythonOrgSearch(unittest.TestCase):
 
@@ -12,13 +13,67 @@ class PythonOrgSearch(unittest.TestCase):
         self.option.add_argument("start-maximized")
         self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=self.option)
 
-    def test_register(self):
+    def test_register_correct(self):
         driver = self.driver
         driver.get("http://localhost:5500/index.html")
         self.assertIn("Cadastro", driver.title)
         h2 = driver.find_element(By.ID, "titulo")
-        h2_text = h2.get_attribute('innerHTML')
-        self.assertIn("Cadastro", h2_text)
+        h2_texto = h2.get_attribute('innerHTML')
+        self.assertIn("Cadastro", h2_texto)
+
+        nome_input = driver.find_element(By.ID, "nome")
+        email_input = driver.find_element(By.ID, "email")
+        cpf_input = driver.find_element(By.ID, "inputCPF")
+        dtnasc_input = driver.find_element(By.ID, "inputDT")
+        senha_input = driver.find_element(By.ID, "senha")
+        confirmaSenha_input = driver.find_element(By.ID, "confirmaSenha")
+
+        nome_input.send_keys("Jorge")
+        email_input.send_keys("jorge@gmail.com")
+        cpf_input.send_keys("80215809092")
+        dtnasc_input.send_keys("10/08/1999")
+        senha_input.send_keys("12345678")
+        confirmaSenha_input.send_keys("12345678")
+
+        btnCadastro = driver.find_element(By.ID, "btnCadastro")
+        btnCadastro.click()
+
+        WebDriverWait(driver, timeout=100)
+
+        alerta = driver.find_element(By.ID, "alerta")
+        alerta_texto = alerta.get_attribute('innerHTML')
+        self.assertIn("Logado com sucesso.", alerta_texto)
+
+    def test_register_cpf_incorreto(self):
+        driver = self.driver
+        driver.get("http://localhost:5500/index.html")
+        self.assertIn("Cadastro", driver.title)
+        h2 = driver.find_element(By.ID, "titulo")
+        h2_texto = h2.get_attribute('innerHTML')
+        self.assertIn("Cadastro", h2_texto)
+
+        nome_input = driver.find_element(By.ID, "nome")
+        email_input = driver.find_element(By.ID, "email")
+        cpf_input = driver.find_element(By.ID, "inputCPF")
+        dtnasc_input = driver.find_element(By.ID, "inputDT")
+        senha_input = driver.find_element(By.ID, "senha")
+        confirmaSenha_input = driver.find_element(By.ID, "confirmaSenha")
+
+        nome_input.send_keys("Jorge")
+        email_input.send_keys("jorge@gmail.com")
+        cpf_input.send_keys("32345809089")
+        dtnasc_input.send_keys("10/08/1999")
+        senha_input.send_keys("12345678")
+        confirmaSenha_input.send_keys("12345678")
+
+        btnCadastro = driver.find_element(By.ID, "btnCadastro")
+        btnCadastro.click()
+
+        WebDriverWait(driver, timeout=100)
+
+        alerta = driver.find_element(By.ID, "alerta")
+        alerta_texto = alerta.get_attribute('innerHTML')
+        self.assertIn("CPF inválido.", alerta_texto)
 
     def tearDown(self):
         self.driver.close()

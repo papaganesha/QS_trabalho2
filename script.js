@@ -15,6 +15,7 @@ function mostrarAlertaWarning(titulo, texto) {
   btn.setAttribute("data-bs-dismiss", "alert");
   btn.setAttribute("aria-label", "Close");
   var strong = document.createElement("strong");
+  strong.setAttribute("id", "alerta");
   strong.textContent = titulo;
   var text = document.createElement("p");
   text.textContent = texto;
@@ -40,6 +41,7 @@ function mostrarAlertaSuccess(titulo, texto) {
   btn.setAttribute("data-bs-dismiss", "alert");
   btn.setAttribute("aria-label", "Close");
   var strong = document.createElement("strong");
+  strong.setAttribute("id", "alerta");
   strong.textContent = titulo;
   var text = document.createElement("p");
   text.textContent = texto;
@@ -63,20 +65,20 @@ function cadastro(e) {
   if (nome.value && email.value && cpf.value && dataNasc.value && senha.value && confirmaSenha.value) {
     //SE SENHAS COMBINAREM
     if (!verificaSenhas(senha.value, confirmaSenha.value)) {
-      mostrarAlertaWarning("As senhas não combinam", "Por favor digite novamente");
+      mostrarAlertaWarning("As senhas não combinam.", "Por favor digite novamente.");
     } else {
       if (!verificaCpf(cpf.value)) {
-        mostrarAlertaWarning("CPF inválido", "Por favor digite um CPF correto.");
+        mostrarAlertaWarning("CPF inválido.", "Por favor digite um CPF correto.");
       } else {
         if (!verificaNasc(dataNasc.value)) {
-          mostrarAlertaWarning("Data de nascimento inválida", "Por favor digite uma data correta, idade minima 12 anos");
+          mostrarAlertaWarning("Data de nascimento inválida.", "Por favor digite uma data correta, idade minima 12 anos.");
         } else {
           mostrarAlertaSuccess("Logado com sucesso.", "Aproveite a plataforma!!!");
         }
       }
     }
   } else {
-    mostrarAlertaWarning("Faltam dados", "Preencha todos os campos");
+    mostrarAlertaWarning("Faltam dados.", "Preencha todos os campos.");
   }
 
 }
@@ -109,17 +111,17 @@ const login = (e) => {
         if (senha.value == "12345678") {
           mostrarAlertaSuccess("Logado com sucesso.", "Aproveite a plataforma!!!");
         } else {
-          mostrarAlertaWarning("Senha inválida", "Senha não confere, tente novamente.");
+          mostrarAlertaWarning("Senha inválida.", "Senha não confere, tente novamente.");
         }
       } else {
-        mostrarAlertaWarning("Email não existe", "Email não encontrado, tente novamente.");
+        mostrarAlertaWarning("Email não existe.", "Email não encontrado, tente novamente.");
       }
     } else {
-      mostrarAlertaWarning("Email inválido", "Email digitado é invalido, tente novamente.");
+      mostrarAlertaWarning("Email inválido.", "Email digitado é invalido, tente novamente.");
     }
 
   } else {
-    mostrarAlertaWarning("Faltam dados", "Preencha todos os campos");
+    mostrarAlertaWarning("Faltam dados.", "Preencha todos os campos.");
   }
 }
 
