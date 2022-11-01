@@ -5,6 +5,8 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+import time
 
 class PythonOrgSearch(unittest.TestCase):
 
@@ -38,12 +40,16 @@ class PythonOrgSearch(unittest.TestCase):
         btnCadastro = driver.find_element(By.ID, "btnCadastro")
         btnCadastro.click()
 
-        WebDriverWait(driver, timeout=100)
+        WebDriverWait(driver, timeout=1000)
 
         alerta =  driver.find_element(By.ID, "alerta")
     
         alerta_texto = alerta.get_attribute('innerHTML')
         self.assertIn("Logado com sucesso.", alerta_texto)
+
+        time.sleep(4)
+
+        driver.quit()
 
     def test_register_cpf_incorreto(self):
         driver = self.driver
@@ -78,6 +84,10 @@ class PythonOrgSearch(unittest.TestCase):
         alerta_texto = alerta.get_attribute('innerHTML')
         self.assertIn("CPF inválido.", alerta_texto)
 
+        time.sleep(4)
+
+        driver.quit()
+
 
     def test_register_vazio(self):
         driver = self.driver
@@ -97,6 +107,10 @@ class PythonOrgSearch(unittest.TestCase):
         
         alerta_texto = alerta.get_attribute('innerHTML')
         self.assertIn("Faltam dados.", alerta_texto)
+
+        time.sleep(4)
+
+        driver.quit()
 
 
     def test_login_correto(self):
@@ -124,6 +138,10 @@ class PythonOrgSearch(unittest.TestCase):
         alerta_texto = alerta.get_attribute('innerHTML')
         self.assertIn("Logado com sucesso.", alerta_texto)
 
+        time.sleep(4)
+
+        driver.quit()
+
     def test_login_email_incorreto(self):
         driver = self.driver
 
@@ -149,6 +167,10 @@ class PythonOrgSearch(unittest.TestCase):
         alerta_texto = alerta.get_attribute('innerHTML')
         self.assertIn("Email inválido.", alerta_texto)
 
+        time.sleep(4)
+
+        driver.quit()
+
     def test_login_vazio(self):
         driver = self.driver
 
@@ -167,6 +189,10 @@ class PythonOrgSearch(unittest.TestCase):
         
         alerta_texto = alerta.get_attribute('innerHTML')
         self.assertIn("Faltam dados.", alerta_texto)
+
+        time.sleep(4)
+
+        driver.quit()
 
 
     def tearDown(self):

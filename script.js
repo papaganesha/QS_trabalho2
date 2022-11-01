@@ -8,7 +8,9 @@ function mostrarAlertaWarning(titulo, texto) {
   div.classList.add("alert-dismissible");
   div.classList.add("fade");
   div.classList.add("show");
-  div.classList.add("mx-4");
+  div.classList.add("mx-auto");
+  div.classList.add("w-75");
+  div.classList.add("mb-5");
   div.setAttribute("role", "alert");
   var btn = document.createElement("button");
   btn.classList.toggle("btn-close");
@@ -34,7 +36,9 @@ function mostrarAlertaSuccess(titulo, texto) {
   div.classList.add("alert-dismissible");
   div.classList.add("fade");
   div.classList.add("show");
-  div.classList.add("mx-4");
+  div.classList.add("mx-auto");
+  div.classList.add("w-75");
+  div.classList.add("mb-5");
   div.setAttribute("role", "alert");
   var btn = document.createElement("button");
   btn.classList.toggle("btn-close");
